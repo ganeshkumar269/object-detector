@@ -1,0 +1,36 @@
+body {
+    background-color: #101010;
+    color:#009578;
+    text-align: center;
+    font-family: 'Montserrat',sans-serif;
+    font-size: 30px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+#go-again-btn {
+    color : white;
+    height: 30px;
+    width:  100px;
+    background-color: #2d9de7;
+    border : 1px solid #ffffff;
+    border-radius : 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px gray;
+}
+
+#download-btn {
+    color : white;
+    height: 30px;
+    width:  100px;
+    background-color: #822ef0;
+    border : 1px solid #ffffff;
+    border-radius : 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px gray;
+}

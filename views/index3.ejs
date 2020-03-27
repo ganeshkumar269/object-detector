@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="snapShotOuput" width=500px height=500px >
+    <canvas id="canvasOutput" width=500px height=500px></canvas>
+    <div id="webcamAttachmentContainer" width=500px height=500px></div>
+    <p id="info"></p>
+    <!-- <video id="videoInput"></video>
+    <img id="imageOut" alt="This an Image"> -->
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+<script >
+    const FPS = 0.1
+Webcam.set({
+        width:500,
+        height:500,
+        image_format:'jpeg',
+        jpeg_quality:90
+    })
+Webcam.attach("#webcamAttachmentContainer")
+const socket = io.connect("https://192.168.43.201:3000")
+socket.on('dataAfterDetection',(data)=>{
+    // image.src = `data:image/jpeg;base64,${data}`
+    var img = document.getElementById('snapShotOuput')
+    var canvasOutput = document.getElementById('canvasOutput');
+    var ctx = canvasOutput.getContext('2d');
+    ctx.drawImage(img,0,0)
+    ctx.beginPath()
+    data.forEach(el => {
+        ctx.rect(el.box_points[0], 
+        el.box_points[1], el.box_points[2], el.box_points[3])        
+        ctx.stroke()
+    });
+    console.log("dataAfterDetection:",data)
+})
+function startDetection(){
+    function processVideo(){
+        let start = Date.now()
+        Webcam.snap((dataUri)=>{
+            console.log("data length:",dataUri.length)
+            document.getElementById('snapShotOuput')
+            .src = dataUri
+            socket.emit('hello','Hello World')
+            socket.emit('base64Data',dataUri)
+            console.log("Snap Sent")
+            delay = 1000/FPS - (Date.now() - start)
+            setTimeout(processVideo,delay > 0 ? delay : 0)
+        })
+    }
+    setTimeout(processVideo,10000)
+}
+Webcam.on('load',startDetection)
+</script>
+</html>

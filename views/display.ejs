@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Your Image
+        </title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles-display.css">
+    </head>
+    <body>
+        <img src= <%= name %> alt="This is your image" width="300" height="300">
+        <br><br>
+        <p>Number of Objects found: <%= count%></p>
+        <form action="/" methond="GET">
+            <button type="submit" id="go-again-btn">Go again.</button>
+        </form>
+        <form action="/download" method="GET">
+            <button type=submit id="download-btn">Download</button>
+        </form>
+    </body>
+</html>
