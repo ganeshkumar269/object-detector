@@ -8,7 +8,6 @@ var multer = require('multer');
 var app = express();
 const server = require('https').Server(options,app)
 var io = require('socket.io')(server)
-// var cv = require('opencv4nodejs')
 
 //Route Handlers
 var onConnection = require('@onConnection')
@@ -33,9 +32,11 @@ app.get("/download",(req,res)=> response.download("./public/output.jpg"))
 app.post('/uploadImage',multer(multerConf).single('photo'),uploadImage)
 app.post('/uploadBase64',uploadBase64)   
 
-io.on('connection', onConnection)
+let spawn = require('child_process').spawn
+let py    = spawn('python', ['./utils/py/imaiBase64Stream.py'])
+// py.stdin.write('test\n')
 
-
+io.on('connection', (s)=>onConnection(s,py))
 
 server.listen(process.env.PORT || 3000 , (err)=>{
     if(err) throw err;

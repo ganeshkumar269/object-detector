@@ -1,11 +1,9 @@
 
 
 
-module.exports = (socket)=>{
+module.exports = (socket,py)=>{
     var saveImage = false
     console.log(__filename+" connection established")
-    let spawn = require('child_process').spawn
-    let py    = spawn('python', ['../utils/py/imaiBase64Stream.py'])
     py.stdout.on('data', (data)=>{
         console.log("Data Event Triggered")
         var t = data.toString()
@@ -26,6 +24,6 @@ module.exports = (socket)=>{
         
         py.stdin.write(dataArrived+"\n")
     })
-    io.on('disconnect',()=>py.stdin.end())
+    // socket.on('disconnect',()=>py.stdin.end())
     socket.on('hello',(data)=>{console.log("Socket Event Hello, Data: ",data)})
 }

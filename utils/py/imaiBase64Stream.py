@@ -23,6 +23,8 @@ custom = detector.CustomObjects(car=True,bus=True,truck=True,bicycle=True,motorc
 #     encoded_string = base64.b64encode(image_file.read())
 while True:
     encoded_string = read_in()
+    if(encoded_string == "test"):
+        continue
     if(encoded_string == "quit"):
         break
     image = Image.open(BytesIO(base64.b64decode(encoded_string)))
