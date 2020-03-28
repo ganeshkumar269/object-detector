@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 <script >
-    const FPS = 1
+    const FPS = 0.5
     var delayStart = 0
     Webcam.set({
             width:500,
@@ -25,7 +25,7 @@
             jpeg_quality:90
         })
     Webcam.attach("#webcamAttachmentContainer")
-    const socket = io.connect("https://192.168.43.201:3000")
+    const socket = io.connect("https://localhost:3000")
     socket.on('dataAfterDetection',(data)=>{
         // image.src = `data:image/jpeg;base64,${data}`
         var img = document.getElementById('snapShotOuput')

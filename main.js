@@ -20,13 +20,13 @@ var displayImage = require('@displayImage')
 //Configuring app variable
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb',extended:true}));
-app.set('view engine','ejs');
 app.use(express.static('public'));
+app.set('view engine','ejs');
 
 
 app.get("/",(request,response)=>{console.log("Request recieved");response.render('home');});
 app.get('/displayImage',displayImage)
-app.get('/detectFromWebCam',(req,res)=>res.render('index3'))
+app.get('/detectFromWebCam',(req,res)=>res.render('detectFromWebcam'))
 app.get("/download",(req,res)=> response.download("./public/output.jpg"))
 
 app.post('/uploadImage',multer(multerConf).single('photo'),uploadImage)
@@ -34,7 +34,6 @@ app.post('/uploadBase64',uploadBase64)
 
 let spawn = require('child_process').spawn
 let py    = spawn('python', ['./utils/py/imaiBase64Stream.py'])
-// py.stdin.write('test\n')
 
 io.on('connection', (s)=>onConnection(s,py))
 
