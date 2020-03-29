@@ -13,7 +13,7 @@ module.exports = (socket,py)=>{
     py.stderr.on('data',(data)=>console.log("py.stderr data Event ",data.toString()))
 
     socket.on('base64Data',(data)=>{
-        var dataArrived = data.replace(/^data:image\/jpeg;base64,/, "");
+        var dataArrived = data.replace(/^data:image\/jpeg;base64,/, "")
         if(saveImage) fs.writeFile("thisisanimage.jpeg", dataArrived, 'base64', (err) =>console.log(err));
         console.log("base64Data socket request arrived ,data length:",data.length)
         py.stdin.write(dataArrived+"\n")

@@ -1,18 +1,19 @@
-module.exports = (request,response)=>{
-    let dataArrived = request.body.data
-    console.log("uploadBase64 request arrived")
-    var spawn = require('child_process').spawn,
-        py    = spawn('python', ['./utils/py/imaiBase64.py'])  ///change the imaaiBase64.py
-    var dataString
+module.exports = (request,response,py)=>{
+    let data = request.body.data
+    let dataArrived = data.replace(/^data:image\/jpeg;base64,/, "");
 
+    console.log("uploadBase64 request arrived")
+    var dataString
     py.stdout.on('data', (data)=>{
-        var str = t.replace(/\'/g,'\"');
-        dataString = JSON.parse(str.toString())
+        console.log(__filename + " Data Event Triggered")
+        dataString = JSON.parse(data.toString().replace(/\'/g,'\"').toString())
     });
     py.stdout.on('end', ()=>{
-        console.log(dataString)
+        console.log(__filename + " End Event Triggered")
+        console.log("DataString:",dataString)
         response.json(dataString)
     });
-    py.stdin.write(JSON.stringify(dataArrived));
-    py.stdin.end();
+    py.stdin.write(dataArrived+"\n");
+    py.stdin.write('quit')
+    py.stdin.end()
 }
