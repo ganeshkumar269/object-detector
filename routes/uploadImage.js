@@ -1,4 +1,3 @@
-require('module-alias/register')
 module.exports = (request,response)=>{
     const spawn = require("child_process").spawn
     var py = spawn("python",["./utils/py/imai.py"])
