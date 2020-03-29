@@ -21,7 +21,7 @@ var multerConf = require('@multerConf')
 
 //Python process
 var spawn = require('child_process').spawn
-var py    = spawn('python', ['./utils/py/imaiBase64Stream.py'])
+var py    = spawn('python', ['./utils/py/imaiBase64.py'])
 
 //Configuring app variable
 app.use(express.json({limit: '50mb'}));
@@ -37,7 +37,7 @@ app.get("/download",(req,res)=> response.download("./public/output.jpg"))
 
 
 //Post Methods
-app.post('/uploadImage',multer(multerConf).single('photo'),uploadImage)
+app.post('/uploadImage',multer(multerConf).single('photo'),(res,req)=>uploadImage(res,req,py))
 app.post('/uploadBase64',(res,req)=>uploadBase64(res,req,py))   
 
 

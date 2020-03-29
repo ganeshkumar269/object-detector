@@ -12,8 +12,9 @@ buttonTag.addEventListener("click",()=>{
 });
 
 ipTag.addEventListener("change",()=>{
-    if(ipTag.value)
+    if(ipTag.value){
         pTag.innerHTML = ipTag.value.split('\\')[2];
+    }
     else 
         pTag.innerHTML = "No file Chosen, yet";
 });
