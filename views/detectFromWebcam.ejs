@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detect From Webcam</title>
 </head>
 <body>
     <img id="snapShotOuput" width=500px height=500px >
     <canvas id="canvasOutput" width=500px height=500px></canvas>
     <div id="webcamAttachmentContainer" width=500px height=500px></div>
     <p id="info"></p>
-    <!-- <video id="videoInput"></video>
-    <img id="imageOut" alt="This an Image"> -->
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
@@ -27,7 +25,6 @@
     Webcam.attach("#webcamAttachmentContainer")
     const socket = io.connect("https://localhost:3000")
     socket.on('dataAfterDetection',(data)=>{
-        // image.src = `data:image/jpeg;base64,${data}`
         var img = document.getElementById('snapShotOuput')
         var canvasOutput = document.getElementById('canvasOutput');
         var ctx = canvasOutput.getContext('2d');
@@ -42,7 +39,7 @@
         console.log("dataAfterDetection:",data)
     })
     function startDetection(){
-        function processVideo(){
+        var processVideo = ()=>{
             let start = Date.now()
             Webcam.snap((dataUri)=>{
                 console.log("data length:",dataUri.length)

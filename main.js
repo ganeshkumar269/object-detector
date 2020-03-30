@@ -1,19 +1,21 @@
 require("module-alias/register")
 
 var fs = require("fs")
-var express = require('express');
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var app = express();
+var express = require('express')
+var app = express()
+var bodyParser = require('body-parser')
+var multer = require('multer')
 var options = {key: fs.readFileSync('./file.pem'),cert: fs.readFileSync('./file.crt')}
 const server = require('https').Server(options,app)
 var io = require('socket.io')(server)
+
 
 //Route Handlers
 var onConnection = require('@onConnection')
 var uploadBase64 = require('@uploadBase64')
 var uploadImage = require('@uploadImage')
 var displayImage = require('@displayImage')
+
 
 //Middlewares
 var multerConf = require('@multerConf')
@@ -23,11 +25,13 @@ var multerConf = require('@multerConf')
 var spawn = require('child_process').spawn
 var py    = spawn('python', ['./utils/py/imaiBase64.py'])
 
+
 //Configuring app variable
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb',extended:true}));
 app.use(express.static('public'));
 app.set('view engine','ejs');
+
 
 //Get Methods
 app.get("/",(request,response)=>{console.log("Request recieved");response.render('home');});
