@@ -23,7 +23,12 @@
             jpeg_quality:90
         })
     Webcam.attach("#webcamAttachmentContainer")
-    const socket = io.connect("https://localhost:3000")
+    var socket
+    if(navigator.vendor == "Google Inc.")
+        socket = io.connect("https://localhost:3000")
+    else
+        socket = io.connect("https://192.168.43.201:3000")
+
     socket.on('dataAfterDetection',(data)=>{
         var img = document.getElementById('snapShotOuput')
         var canvasOutput = document.getElementById('canvasOutput');

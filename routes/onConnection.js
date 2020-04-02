@@ -1,5 +1,4 @@
-
-
+var fs = require('fs')
 
 module.exports = (socket,py)=>{
     var saveImage = false
