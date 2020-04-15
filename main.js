@@ -1,12 +1,10 @@
 require("module-alias/register")
 
-var fs = require("fs")
 var express = require('express')
 var app = express()
-var bodyParser = require('body-parser')
 var multer = require('multer')
-var options = {key: fs.readFileSync('./file.pem'),cert: fs.readFileSync('./file.crt')}
-const server = require('https').Server(options,app)
+// var options = {key: fs.readFileSync('./file.pem'),cert: fs.readFileSync('./file.crt')}
+const server = require('http').Server(app)
 var io = require('socket.io')(server)
 
 

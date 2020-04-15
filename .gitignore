@@ -3,7 +3,7 @@ test
 city.jpg
 thisisanimage.jpeg
 pyscript.py
-models
+models/yolo.h5
 file.crt
 csr.pem
 file.pem
