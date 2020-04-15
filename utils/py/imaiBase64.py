@@ -14,7 +14,7 @@ def read_in():
 execution_path = os.getcwd()
 detector = ObjectDetection()
 detector.setModelTypeAsTinyYOLOv3()
-detector.setModelPath( os.path.join(execution_path , "models\\yolo-tiny.h5"))
+detector.setModelPath(os.path.join(os.path.join(execution_path , "models"),"yolo-tiny.h5"))
 detector.loadModel()
 custom = detector.CustomObjects(car=True,bus=True,truck=True,bicycle=True,motorcycle=True,bottle=True)
 sys.stderr.write("python:Model Loaded\n")
