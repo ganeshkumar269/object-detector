@@ -12,5 +12,6 @@ module.exports = (request,response,py)=>{
     py.stdout.on('end', ()=>{
         console.log(__filename + " End Event Triggered")
     })
+    py.stderr.on('error',(err)=> console.log("uploadBase64.js:"," Error Event , err",err))
     py.stdin.write(dataArrived+"\n")
 }

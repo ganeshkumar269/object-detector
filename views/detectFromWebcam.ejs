@@ -15,6 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 <script >
     const FPS = 0.5
+    console.log("FPS:",FPS)
     var delayStart = 0
     Webcam.set({
             width:500,
@@ -23,11 +24,11 @@
             jpeg_quality:90
         })
     Webcam.attach("#webcamAttachmentContainer")
-    var socket
-    if(navigator.vendor == "Google Inc.")
-        socket = io.connect("https://localhost:3000")
-    else
-        socket = io.connect("https://192.168.43.201:3000")
+    var socket = io.connect("http://vehicle-detector.herokuapp.com")
+    // if(navigator.vendor == "Google Inc.")
+    //     socket = io.connect("https://localhost:3000")
+    // else
+    //     socket = io.connect("https://192.168.43.201:3000")
 
     socket.on('dataAfterDetection',(data)=>{
         var img = document.getElementById('snapShotOuput')

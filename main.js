@@ -22,7 +22,7 @@ var multerConf = require('@multerConf')
 //Python process
 var spawn = require('child_process').spawn
 var py    = spawn('python', ['./utils/py/imaiBase64.py'])
-
+py.on('error',()=>console.log("main.js:Failed to Start Python Process"))
 
 //Configuring app variable
 app.use(express.json({limit: '50mb'}));
