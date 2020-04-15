@@ -35,7 +35,7 @@ app.set('view engine','ejs');
 app.get("/",(request,response)=>{console.log("Request recieved");response.render('home');});
 app.get('/displayImage',displayImage)
 app.get('/detectFromWebCam',(req,res)=>res.render('detectFromWebcam'))
-app.get("/download",(req,res)=> response.download("./public/output.jpg"))
+app.get("/download",(req,res)=> res.download("./public/output.jpg"))
 
 
 //Post Methods
