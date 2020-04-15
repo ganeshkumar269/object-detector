@@ -14,7 +14,7 @@ def read_in():
 execution_path = os.getcwd()
 detector = ObjectDetection()
 detector.setModelTypeAsTinyYOLOv3()
-detector.setModelPath( os.path.join(execution_path , "models\\tiny-yolo.h5"))
+detector.setModelPath( os.path.join(execution_path , "models\\yolo-tiny.h5"))
 detector.loadModel()
 custom = detector.CustomObjects(car=True,bus=True,truck=True,bicycle=True,motorcycle=True,bottle=True)
 sys.stderr.write("python:Model Loaded\n")
@@ -27,6 +27,8 @@ while True:
     encoded_string = read_in()
     if(encoded_string.__len__() < 10):
         if(encoded_string == "test\n"):
+            sys.stderr.write("Test Command Was Detected")
+            sys.stderr.flush()
             continue
         if(encoded_string == "quit\n"):
             break
